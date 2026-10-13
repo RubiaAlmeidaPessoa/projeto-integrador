@@ -1,0 +1,129 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | Academia FitPro{% endblock %}
+
+{% block branding %}
+<div id="site-name"><a href="{% url 'admin:index' %}">🏋️ Academia FitPro — Administração</a></div>
+{% endblock %}
+
+{% block footer %}
+{{ block.super }}
+<a href="{% url 'home' %}" class="voltar-inicio">← Voltar ao início</a>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    /* ---------- tela de login: mesmo tamanho do login do aluno ---------- */
+    body.login {
+        background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                    url("{% static 'alunos/img/fundo.jpg' %}") center / cover no-repeat fixed;
+        background-color: #1c1c1c;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    body.login #container {
+        position: relative;
+        overflow: visible;
+        box-sizing: border-box;
+        width: 400px;
+        min-width: 0;
+        max-width: calc(100% - 32px);
+        margin: 0;
+        font-size: 14px;
+    }
+    body.login .main,
+    body.login .content,
+    body.login #content {
+        position: static;
+    }
+    body.login #header {
+        height: auto;
+        padding: 18px 20px;
+        justify-content: center;
+        border-radius: 4px 4px 0 0;
+    }
+    body.login #site-name {
+        margin: 0;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    body.login #content {
+        padding: 20px 24px;
+    }
+    body.login .form-row {
+        padding: 0;
+        margin-bottom: 14px;
+    }
+    body.login .form-row label {
+        display: block;
+        padding: 0;
+        margin-bottom: 4px;
+        font-size: 14px;
+        line-height: 2;
+    }
+    body.login .form-row #id_username,
+    body.login .form-row #id_password {
+        padding: 9px 10px;
+        font-size: 14px;
+    }
+    body.login .submit-row {
+        clear: both;
+        padding: 18px 0 0;
+    }
+    body.login .submit-row input {
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+    /* ---------- link "Voltar ao início": só aparece no login ---------- */
+    .voltar-inicio { display: none; }
+    body.login .voltar-inicio {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin-top: 18px;
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+        opacity: 0.85;
+        font-size: 14px;
+    }
+    body.login .voltar-inicio:hover {
+        opacity: 1;
+        color: #fff;
+    }
+
+    /* ---------- identidade visual do painel ---------- */
+    :root {
+        --primary: #1c1c1c;
+        --header-color: #ff6b00;
+        --header-bg: #1c1c1c;
+        --header-branding-color: #ff6b00;
+        --header-link-color: #ff6b00;
+        --breadcrumbs-bg: #ff6b00;
+        --breadcrumbs-fg: #1c1c1c;
+        --breadcrumbs-link-fg: #1c1c1c;
+        --button-bg: #ff6b00;
+        --button-hover-bg: #e05e00;
+        --default-button-bg: #ff6b00;
+        --default-button-hover-bg: #e05e00;
+        --link-fg: #ff6b00;
+        --link-hover-color: #e05e00;
+    }
+
+    #site-name {
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+</style>
+{% endblock %}

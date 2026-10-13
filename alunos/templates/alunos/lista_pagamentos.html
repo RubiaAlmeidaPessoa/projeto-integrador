@@ -1,0 +1,35 @@
+{% extends "alunos/base.html" %}
+{% block title %}Pagamentos{% endblock %}
+{% block content %}
+<h2 class="mb-4">Pagamentos</h2>
+<table class="table bg-white">
+    <thead>
+        <tr>
+            <th>Aluno</th>
+            <th>Valor</th>
+            <th>Vencimento</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in pagamentos %}
+        <tr>
+            <td>{{ p.matricula.aluno.nome }}</td>
+            <td>R$ {{ p.valor }}</td>
+            <td>{{ p.data_vencimento }}</td>
+            <td>
+                {% if p.status == "PAGO" %}
+                    <span class="badge bg-success">Pago</span>
+                {% elif p.status == "PENDENTE" %}
+                    <span class="badge bg-warning text-dark">Pendente</span>
+                {% else %}
+                    <span class="badge bg-danger">Atrasado</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">Nenhum pagamento registrado ainda.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "alunos/base.html" %}
+{% block title %}Fichas de Treino{% endblock %}
+{% block content %}
+<h2 class="mb-4">Fichas de Treino</h2>
+<div class="row">
+    {% for ficha in fichas %}
+    <div class="col-md-6 mb-4">
+        <div class="card p-3">
+            <h5>{{ ficha.aluno.nome }}</h5>
+            <p class="text-muted mb-1">
+                Objetivo: {{ ficha.objetivo|default:"Não informado" }}<br>
+                Instrutor: {{ ficha.instrutor.nome|default:"Não atribuído" }}
+            </p>
+            <hr>
+            <ul class="list-group list-group-flush">
+                {% for ex in ficha.exercicios.all %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>{{ ex.nome }}</span>
+                    <span class="text-muted">{{ ex.series }}x{{ ex.repeticoes }}</span>
+                </li>
+                {% empty %}
+                <li class="list-group-item text-muted">Nenhum exercício cadastrado.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% empty %}
+    <p>Nenhuma ficha de treino cadastrada ainda.</p>
+    {% endfor %}
+</div>
+{% endblock %}

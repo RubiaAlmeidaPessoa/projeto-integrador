@@ -1,0 +1,23 @@
+{% extends "alunos/base.html" %}
+{% block title %}Aulas Coletivas{% endblock %}
+{% block content %}
+<h2 class="mb-4">Aulas Coletivas</h2>
+<div class="row">
+    {% for aula in aulas %}
+    <div class="col-md-6 mb-4">
+        <div class="card p-3">
+            <h5>{{ aula.nome }}</h5>
+            <p class="text-muted mb-1">
+                {{ aula.get_dia_semana_display }} às {{ aula.horario }} —
+                Instrutor: {{ aula.instrutor.nome|default:"a definir" }}
+            </p>
+            <span class="badge bg-warning text-dark mb-2">
+                {{ aula.inscricoes.count }} / {{ aula.vagas }} vagas ocupadas
+            </span>
+        </div>
+    </div>
+    {% empty %}
+    <p>Nenhuma aula cadastrada ainda.</p>
+    {% endfor %}
+</div>
+{% endblock %}

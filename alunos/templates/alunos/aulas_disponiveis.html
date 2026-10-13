@@ -1,0 +1,31 @@
+{% extends "alunos/base.html" %}
+{% block title %}Aulas Disponíveis{% endblock %}
+{% block content %}
+<h2 class="mb-4">Aulas Coletivas</h2>
+<div class="row">
+    {% for aula in aulas %}
+    <div class="col-md-6 mb-4">
+        <div class="card p-3">
+            <h5>{{ aula.nome }}</h5>
+            <p class="text-muted mb-1">
+                {{ aula.get_dia_semana_display }} às {{ aula.horario }} —
+                Instrutor: {{ aula.instrutor.nome|default:"a definir" }}
+            </p>
+            <p class="mb-2">{{ aula.inscricoes.count }} / {{ aula.vagas }} vagas ocupadas</p>
+            {% if aula.id in minhas_inscricoes %}
+                <span class="badge bg-success">Você já está inscrito(a)</span>
+            {% elif aula.inscricoes.count >= aula.vagas %}
+                <span class="badge bg-danger">Sem vagas</span>
+            {% else %}
+                <form method="post" action="{% url 'inscrever_aula' aula.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-academia btn-sm">Inscrever-se</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <p>Nenhuma aula cadastrada ainda.</p>
+    {% endfor %}
+</div>
+{% endblock %}

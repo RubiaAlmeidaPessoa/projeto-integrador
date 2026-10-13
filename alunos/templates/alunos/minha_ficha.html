@@ -1,0 +1,26 @@
+{% extends "alunos/base.html" %}
+{% block title %}Minha Ficha{% endblock %}
+{% block content %}
+<h2 class="mb-4">Minhas Fichas de Treino</h2>
+
+<form method="post" action="{% url 'fazer_checkin' %}" class="mb-4">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-academia">✅ Fazer Check-in Hoje</button>
+</form>
+
+{% for ficha in fichas %}
+<div class="card p-3 mb-3">
+    <p class="text-muted mb-1">Objetivo: {{ ficha.objetivo|default:"Não informado" }}</p>
+    <ul class="list-group list-group-flush">
+        {% for ex in ficha.exercicios.all %}
+        <li class="list-group-item d-flex justify-content-between">
+            <span>{{ ex.nome }}</span>
+            <span class="text-muted">{{ ex.series }}x{{ ex.repeticoes }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% empty %}
+<p>Você ainda não tem nenhuma ficha de treino cadastrada.</p>
+{% endfor %}
+{% endblock %}

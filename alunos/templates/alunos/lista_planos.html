@@ -1,0 +1,18 @@
+{% extends "alunos/base.html" %}
+{% block title %}Planos{% endblock %}
+{% block content %}
+<h2 class="mb-4">Nossos Planos</h2>
+<div class="row">
+    {% for plano in planos %}
+    <div class="col-md-4 mb-3">
+        <div class="card p-4 text-center">
+            <h4>{{ plano.nome }}</h4>
+            <p class="display-6 text-warning">R$ {{ plano.valor }}</p>
+            <p class="text-muted">{{ plano.duracao_meses }} meses</p>
+        </div>
+    </div>
+    {% empty %}
+    <p>Nenhum plano cadastrado ainda.</p>
+    {% endfor %}
+</div>
+{% endblock %}

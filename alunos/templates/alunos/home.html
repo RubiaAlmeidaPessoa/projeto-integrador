@@ -1,0 +1,37 @@
+{% extends "alunos/base.html" %}
+{% load static %}
+{% block title %}Início{% endblock %}
+{% block body_class %}no-sidebar home-bg{% endblock %}
+
+{% block extra_head %}
+<style>
+    body.home-bg {
+        background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                    url("{% static 'alunos/img/fundo.jpg' %}") center / cover no-repeat fixed;
+        background-color: #1c1c1c;
+    }
+    .home-hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #fff;
+        padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<div class="home-hero">
+    <h1 class="display-4 fw-bold">🏋️ Bem-vindo à Academia FitPro</h1>
+    <p class="fs-5 mb-4">Escolha como deseja entrar no sistema.</p>
+    <div class="d-flex gap-3">
+        <a href="{% url 'aluno_login' %}" class="btn btn-lg btn-outline-light" style="background:#ff6b00; color:#fff;">Sou aluno</a>
+        <a href="{% url 'admin:login' %}" class="btn btn-lg btn-outline-light" style="background:#102370; color:#fff;">Administrador</a>
+    </div>
+</div>
+{% endblock %}

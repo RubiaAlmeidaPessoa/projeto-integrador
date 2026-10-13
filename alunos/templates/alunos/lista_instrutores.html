@@ -1,0 +1,18 @@
+{% extends "alunos/base.html" %}
+{% block title %}Instrutores{% endblock %}
+{% block content %}
+<h2 class="mb-4">Nossos Instrutores</h2>
+<div class="row">
+    {% for instrutor in instrutores %}
+    <div class="col-md-4 mb-3">
+        <div class="card p-3">
+            <h5>{{ instrutor.nome }}</h5>
+            <p class="text-muted mb-1">{{ instrutor.email }}</p>
+            <span class="badge bg-warning text-dark">{{ instrutor.especialidade }}</span>
+        </div>
+    </div>
+    {% empty %}
+    <p>Nenhum instrutor cadastrado ainda.</p>
+    {% endfor %}
+</div>
+{% endblock %}

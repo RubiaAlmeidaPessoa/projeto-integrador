@@ -1,0 +1,18 @@
+{% extends "alunos/base.html" %}
+{% block title %}Alunos{% endblock %}
+{% block content %}
+<h2 class="mb-4">Nossos Alunos</h2>
+<div class="row">
+    {% for aluno in alunos %}
+    <div class="col-md-4 mb-3">
+        <div class="card p-3">
+            <h5>{{ aluno.nome }}</h5>
+            <p class="text-muted mb-1">{{ aluno.email }}</p>
+            <span class="badge bg-warning text-dark">{{ aluno.plano_atual.nome|default:"Sem plano" }}</span>
+        </div>
+    </div>
+    {% empty %}
+    <p>Nenhum aluno cadastrado ainda.</p>
+    {% endfor %}
+</div>
+{% endblock %}

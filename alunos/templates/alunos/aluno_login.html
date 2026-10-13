@@ -1,0 +1,129 @@
+{% extends "alunos/base.html" %}
+{% load static %}
+{% block title %}Login do Aluno{% endblock %}
+{% block body_class %}no-sidebar login-bg{% endblock %}
+
+{% block extra_head %}
+<style>
+    body.login-bg {
+        background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                    url("{% static 'alunos/img/fundo.jpg' %}") center / cover no-repeat fixed;
+        background-color: #1c1c1c;
+    }
+    .login-wrap {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+    }
+    .login-box {
+        position: relative;
+        width: 400px;
+        max-width: 100%;
+        font-size: 14px;
+    }
+    .login-card {
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    .login-header {
+        background: #1c1c1c;
+        padding: 18px 20px;
+        text-align: center;
+    }
+    .login-header h1 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: #f5dd5d;
+    }
+    .login-body {
+        padding: 20px 24px;
+        color: #fff;
+    }
+    .login-body label {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+        line-height: 2;
+    }
+    .login-body input {
+        width: 100%;
+        padding: 9px 10px;
+        background: #111;
+        border: 1px solid #333;
+        border-radius: 4px;
+        color: #fff;
+        margin-bottom: 14px;
+        font-size: 14px;
+    }
+    .login-body input:focus {
+        outline: none;
+        border-color: #ff6b00;
+    }
+    .btn-acessar {
+        display: block;
+        margin: 18px auto 0;
+        background: #ff6b00;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    .btn-acessar:hover { background: #e05e00; }
+    .login-erro {
+        background: #4a1c1c;
+        color: #ff9b9b;
+        border: 1px solid #7a2a2a;
+        padding: 10px 14px;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        font-size: 14px;
+    }
+    .voltar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin-top: 18px;
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+        opacity: 0.85;
+        font-size: 14px;
+    }
+    .voltar:hover { opacity: 1; color: #fff; }
+</style>
+{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<div class="login-wrap">
+    <div class="login-box">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>🏋️ Academia FitPro — Área do Aluno</h1>
+            </div>
+            <div class="login-body">
+                {% if erro %}<div class="login-erro">{{ erro }}</div>{% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="username">Usuário:</label>
+                    <input type="text" name="username" id="username" required autofocus>
+                    <label for="password">Senha:</label>
+                    <input type="password" name="password" id="password" required>
+                    <button type="submit" class="btn-acessar">Acessar</button>
+                </form>
+            </div>
+        </div>
+        <a href="{% url 'home' %}" class="voltar">← Voltar ao início</a>
+    </div>
+</div>
+{% endblock %}
